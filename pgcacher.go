@@ -409,6 +409,9 @@ func walkDir(dir string, depth int, maxDepth int) []string {
 			files = append(files, walkDir(curdir, depth+1, maxDepth)...)
 			continue
 		}
+		if file.Mode()&os.ModeSymlink != 0 {
+			continue
+		}
 
 		files = append(files, curdir)
 	}
